@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,7 +14,8 @@ import java.time.Duration;
 import java.util.Properties;
 
 public class ElementSelector {
-    public static void main(String[] args) {
+    @Test
+    public void Test() {
 
         WebDriver driver = new ChromeDriver();
 
