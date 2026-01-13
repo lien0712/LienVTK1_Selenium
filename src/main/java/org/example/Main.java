@@ -15,22 +15,6 @@ public class Main {
     public static void main(String[] args) {
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
-        WebDriver driver = new ChromeDriver();
-        driver.navigate().to("https://google.com");
 
-        Properties prop = new Properties();
-        try {
-            InputStream input = new FileInputStream( "src/main/resources/config.properties");
-            prop.load(input);
-
-            String userName = prop.getProperty("username");
-            System.out.println(userName);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        driver.close();
     }
 }
