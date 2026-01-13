@@ -13,18 +13,20 @@ import java.time.Duration;
 import java.util.Properties;
 
 public class ElementSelector {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
         WebDriver driver = new ChromeDriver();
-        driver.navigate().to("https://google.com");
 
         Properties prop = new Properties();
+
         try {
             InputStream input = new FileInputStream( "src/main/resources/config.properties");
             prop.load(input);
 
             String userName = prop.getProperty("username");
             System.out.println(userName);
+            driver.navigate().to(prop.getProperty("url"));
+
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
