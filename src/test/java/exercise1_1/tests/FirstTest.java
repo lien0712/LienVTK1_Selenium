@@ -1,6 +1,6 @@
-package Exercise1_1.tests;
+package exercise1_1.tests;
 
-import Base.BaseTest;
+import base.BaseTest;
 import org.testng.annotations.Test;
 import java.io.FileInputStream;
 import java.io.IOException;
