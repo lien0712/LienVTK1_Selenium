@@ -27,6 +27,5 @@ public class ElementLocatorsTest extends BaseTest {
                 IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 }
