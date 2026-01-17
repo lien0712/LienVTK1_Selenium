@@ -13,11 +13,9 @@ import java.time.Duration;
 
 public class PracticeFormPage extends BasePage {
 
-    ConfigReader con = new ConfigReader();
-    JavascriptExecutor js = (JavascriptExecutor) driver;
     private By firstNameInput = By.id("firstName");
     private By lastNameInput = By.id("lastName");
-    private By emailInput = By.cssSelector("input[placeholder='name@example.com'");
+    private By emailInput = By.cssSelector("input[placeholder='name@example.com']");
     private By genderRadio = By.xpath("//label[normalize-space()='Male']");
     private By mobileInput = By.xpath("//input[@id='userNumber']");
     private By hobbiesCheckbox = By.xpath("//label[text()='Reading']");
@@ -29,6 +27,7 @@ public class PracticeFormPage extends BasePage {
     }
 
     public void inputInformation() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         driver.findElement(firstNameInput).sendKeys(con.getDataInput("firstname"));
         driver.findElement(lastNameInput).sendKeys(con.getDataInput("lastname"));
         driver.findElement(emailInput).sendKeys(con.getDataInput("email"));
@@ -40,7 +39,6 @@ public class PracticeFormPage extends BasePage {
         js.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(stateDropdown));
         driver.findElement(stateDropdown).click();
         String xpathOption = "//div[contains(@class, 'option') and text()='NCR']";
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement option = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathOption)));
         option.click();
     }
