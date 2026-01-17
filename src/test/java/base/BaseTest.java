@@ -7,16 +7,16 @@ import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
 
-    protected WebDriver driver;
+    public WebDriver driver;
 
     @BeforeMethod
-    public void getDriver() {
+    public void setUp() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
 
-    @AfterMethod
-    public void closeDriver() {
-        driver.quit();
-    }
+//    @AfterMethod
+//    public void tearDown() {
+//        driver.quit();
+//    }
 }
