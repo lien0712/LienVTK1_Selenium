@@ -15,8 +15,8 @@ public class BaseTest {
         driver.manage().window().maximize();
     }
 
-//    @AfterMethod
-//    public void tearDown() {
-//        driver.quit();
-//    }
+    @AfterMethod
+    public void tearDown() {
+        driver.quit();
+    }
 }
