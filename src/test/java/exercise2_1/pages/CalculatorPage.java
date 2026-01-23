@@ -12,6 +12,6 @@ public class CalculatorPage {
         return a * b;
     }
     public double divide(int a, int b){
-        return (double)a / b;
+        return a / b;
     }
 }
