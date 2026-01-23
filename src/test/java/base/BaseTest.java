@@ -21,6 +21,7 @@ public class BaseTest {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         con = new ConfigReader();
         driver.manage().window().maximize();
+        con = new ConfigReader();
     }
 
     @AfterMethod
