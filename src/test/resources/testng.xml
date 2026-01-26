@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Test suite" verbose="1">
+    <test name="Calculator Test" parallel="true">
+        <parameter name="a" value="20"/>
+        <parameter name="b" value="5"/>
+        <classes>
+            <class name="exercise2_1.testcases.CalculatorTest">
+                <methods>
+                    <include name="testAdd"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Dynamic Loading Test" parallel="true">
+        <classes>
+            <class name="exercise1_4.testcases.DynamicLoadingTest"/>
+        </classes>
+    </test>
+</suite>
+
+
