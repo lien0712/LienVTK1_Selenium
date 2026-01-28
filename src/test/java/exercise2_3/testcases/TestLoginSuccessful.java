@@ -24,31 +24,26 @@ public class TestLoginSuccessful extends BaseTest {
         loginPage.enterUsername(con.getDataInput("username"));
         loginPage.enterPassword(con.getDataInput("password"));
         loginPage.clickSubmit();
+        boolean result = successPage.isLoggedIn();
+        Assert.assertTrue(result, "Login should be successful");
+        Assert.assertTrue(successPage.getSuccessText().contains("Successfully"), "Success message not displayed correctly");
+
     }
 
     @Test(groups = {"loginfail"})
     public void testInvalidUser() {
-        loginPage.enterUsername(con.getDataInput("invalidusername"));
+        loginPage.enterUsername(con.getDataInput("incorrectusername"));
         loginPage.enterPassword(con.getDataInput("password"));
         loginPage.clickSubmit();
+        Assert.assertEquals(loginPage.getErrorMessage(), con.getDataInput("errorUsername"), "Error message mismatch");
     }
 
     @Test(groups = {"loginfail"})
     public void testInvalidPassword() {
         loginPage.enterUsername(con.getDataInput("username"));
-        loginPage.enterPassword(con.getDataInput("invalidpassword"));
+        loginPage.enterPassword(con.getDataInput("incorrectpassword"));
         loginPage.clickSubmit();
+        Assert.assertEquals(loginPage.getErrorMessage(), con.getDataInput("errorPassword"), "Error message mismatch");
     }
 
-    @Test(groups = {"loginsuccess"})
-    public void testVerifyLoginSuccessful() {
-        String successText = successPage.getSuccessText();
-        Assert.assertTrue(!successText.isEmpty(), "Expected success message not found");
-    }
-
-    @Test(groups = {"loginfail"})
-    public void testVerifyLoginFail() {
-        boolean result = successPage.isLoggedIn();
-        Assert.assertTrue(!result, "Login fail");
-    }
 }
