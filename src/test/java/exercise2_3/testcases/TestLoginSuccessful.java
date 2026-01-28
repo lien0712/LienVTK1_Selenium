@@ -25,7 +25,7 @@ public class TestLoginSuccessful extends BaseTest {
         loginPage.clickSubmit();
         boolean result = successPage.isLoggedIn();
         Assert.assertTrue(result, "Login should be successful");
-        Assert.assertTrue(successPage.getSuccessText().contains("Successfully"), "Success message not displayed correctly");
+        Assert.assertTrue(successPage.getSuccessText().contains("Successfully"), "Success message not displayed correctly.");
 
     }
 
