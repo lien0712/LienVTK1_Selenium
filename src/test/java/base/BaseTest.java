@@ -22,6 +22,7 @@ public class BaseTest {
         con = new ConfigReader();
         driver.manage().window().maximize();
         con = new ConfigReader();
+        driver.manage().window().maximize();
     }
 
     @AfterMethod
