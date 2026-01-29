@@ -26,16 +26,28 @@ public class PracticeFormPage extends BasePage {
         super(driver);
     }
 
+    public By genderRadio(String text){
+        String xpathGender = String.format("//div[@id='genterWrapper']//label[text()='%s']", text);
+        return By.xpath(xpathGender);
+    }
+
+    public By hobbiesCheckbox(String text){
+        String xpathHobbies = String.format("//div[@id='hobbiesWrapper']//label[text()='%s']", text);
+       return By.xpath(xpathHobbies);
+    }
+
     public void inputInformation() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         driver.findElement(firstNameInput).sendKeys(con.getDataInput("firstname"));
         driver.findElement(lastNameInput).sendKeys(con.getDataInput("lastname"));
         driver.findElement(emailInput).sendKeys(con.getDataInput("email"));
-        js.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(genderRadio));
-        driver.findElement(genderRadio).click();
+        By gender = genderRadio(con.getDataInput("gender"));
+        js.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(gender));
+        driver.findElement(gender).click();
         driver.findElement(mobileInput).sendKeys(con.getDataInput("phone"));
-        js.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(hobbiesCheckbox));
-        driver.findElement(hobbiesCheckbox).click();
+        By hobbie = hobbiesCheckbox(con.getDataInput("hobbie"));
+        js.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(hobbie));
+        driver.findElement(hobbie).click();
         js.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(stateDropdown));
         driver.findElement(stateDropdown).click();
         String xpathOption = "//div[contains(@class, 'option') and text()='NCR']";
