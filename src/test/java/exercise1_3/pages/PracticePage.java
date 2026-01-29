@@ -4,7 +4,6 @@ import base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.WindowType;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
@@ -22,17 +21,15 @@ public class PracticePage extends BasePage {
     }
 
     public void loginAccount(String username, String password){
-        wait.until(ExpectedConditions.or(
-                ExpectedConditions.visibilityOfElementLocated(usernameInput)));
-        driver.findElement(usernameInput).clear();
-        driver.findElement(usernameInput).sendKeys(username);
-        wait.until(ExpectedConditions.or(
-                ExpectedConditions.visibilityOfElementLocated(passwordInput)));
-        driver.findElement(passwordInput).clear();
-        driver.findElement(passwordInput).sendKeys(password);
-        wait.until(ExpectedConditions.or(
-                ExpectedConditions.visibilityOfElementLocated(submitButton)));
-        driver.findElement(submitButton).click();
+        WebElement usernameField = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(usernameInput));
+        usernameField.clear();
+        usernameField.sendKeys(username);
+        WebElement passwordField= wait.until(ExpectedConditions.visibilityOfElementLocated(passwordInput));
+        passwordField.clear();
+        passwordField.sendKeys(password);
+        WebElement button = wait.until(ExpectedConditions.visibilityOfElementLocated(submitButton));
+        button.click();
     }
 
     public void verifySuccessMessage(){
