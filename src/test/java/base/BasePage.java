@@ -8,12 +8,12 @@ import java.time.Duration;
 
 public class BasePage {
     protected WebDriver driver;
-    protected ConfigReader con;
     protected WebDriverWait wait;
+    protected ConfigReader con;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        this.con = new ConfigReader();
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.con = new ConfigReader();
     }
 }

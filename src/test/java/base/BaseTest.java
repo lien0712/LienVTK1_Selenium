@@ -7,17 +7,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import java.time.Duration;
+
 public class BaseTest {
 
     public WebDriver driver;
-    public ConfigReader con;
     public WebDriverWait wait;
+    public ConfigReader con;
 
     @BeforeMethod
     public void setUp() {
         driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         con = new ConfigReader();
+        driver.manage().window().maximize();
     }
 
     @AfterMethod
