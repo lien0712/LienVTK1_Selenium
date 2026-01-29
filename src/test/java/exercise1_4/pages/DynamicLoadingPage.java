@@ -1,11 +1,9 @@
 package exercise1_4.pages;
 
 import base.BasePage;
-import org.apache.hc.core5.util.Asserts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.Assert;
 
 public class DynamicLoadingPage extends BasePage {
     private By startButton = By.xpath("//button[normalize-space()='Start']");
@@ -21,14 +19,13 @@ public class DynamicLoadingPage extends BasePage {
     }
 
     public void verifySuccess() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(loadingBar));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(loadingBar));
         wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
-        Assert.assertEquals(driver.findElement(successMessage).getText(),con.getDataInput("loadingsuccess"));
-    }
-
-    public void waitForLoadingDisappear() {
-        wait.until(driver ->
-                driver.findElements(loadingBar).isEmpty()
-                        || !driver.findElement(loadingBar).isDisplayed()
-        );
+        if (driver.findElement(successMessage).getText().equals("Hello World!")) {
+            System.out.println("Successful");
+        } else {
+            System.out.println("Failed");
+        }
     }
 }

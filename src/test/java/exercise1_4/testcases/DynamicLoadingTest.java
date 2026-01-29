@@ -10,9 +10,8 @@ public class DynamicLoadingTest extends BaseTest {
     @Test
     public void dynamicTest(){
         loadingPage = new DynamicLoadingPage(driver);
-        driver.get(con.getDataInput("urlloading"));
+        driver.navigate().to(con.getDataInput("urlloading"));
         loadingPage.clickButton();
-        loadingPage.waitForLoadingDisappear();
         loadingPage.verifySuccess();
     }
 }
