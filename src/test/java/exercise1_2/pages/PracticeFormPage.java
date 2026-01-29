@@ -11,7 +11,8 @@ public class PracticeFormPage extends BasePage {
 
     private By firstNameInput = By.id("firstName");
     private By lastNameInput = By.id("lastName");
-    private By emailInput = By.id("userEmail");
+    private By emailInput = By.cssSelector("input[placeholder='name@example.com']");
+    private By genderRadio = By.xpath("//label[normalize-space()='Male']");
     private By mobileInput = By.xpath("//input[@id='userNumber']");
     // /preceding-sibling::input
     private By stateDropdown = By.xpath("//div[@id='state']");

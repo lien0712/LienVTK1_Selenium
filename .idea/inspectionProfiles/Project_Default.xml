@@ -38,5 +38,19 @@
         </value>
       </option>
     </inspection_tool>
+    <inspection_tool class="groupsTestNG" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="groups">
+        <value>
+          <list size="6">
+            <item index="0" class="java.lang.String" itemvalue="advanced" />
+            <item index="1" class="java.lang.String" itemvalue="basic" />
+            <item index="2" class="java.lang.String" itemvalue="success" />
+            <item index="3" class="java.lang.String" itemvalue="fail" />
+            <item index="4" class="java.lang.String" itemvalue="loginsuccess" />
+            <item index="5" class="java.lang.String" itemvalue="loginfail" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
   </profile>
 </component>

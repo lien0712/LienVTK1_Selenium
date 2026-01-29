@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Test suite" verbose="1">
+    <test name="Practice Page Test">
+<!--        <groups>-->
+<!--            <run>-->
+<!--                <include name="loginsuccess"/>-->
+<!--            </run>-->
+<!--        </groups>-->
+        <classes>
+            <class name="exercise2_3.testcases.TestLoginSuccessful">
+            </class>
+        </classes>
+    </test>
+</suite>
+
+
