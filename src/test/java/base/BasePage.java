@@ -19,7 +19,7 @@ public class BasePage {
     protected WebDriverWait wait;
     protected ConfigReader con;
     protected Actions actions;
-    JavascriptExecutor js;
+    protected JavascriptExecutor js;
 
 
     public BasePage(WebDriver driver) {

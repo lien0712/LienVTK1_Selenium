@@ -5,16 +5,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ButtonsPage extends BasePage {
 
     By doubleClickButton = By.id("doubleClickBtn");
     By rightClickButton = By.id("rightClickBtn");
-    By clickMeButton = By.id("2zROf");
+    By clickMeButton = By.xpath("//button[text()='Click Me']");
     By doubleClickText = By.id("doubleClickMessage");
     By rightClickText = By.id("rightClickMessage");
     By clickMeText = By.id("dynamicClickMessage");
+    By dragElement = By.id("draggable");
+    By dropElement = By.id("droppable");
+    By userName = By.id("userName");
 
     public ButtonsPage(WebDriver driver) {
         super(driver);
@@ -36,19 +40,30 @@ public class ButtonsPage extends BasePage {
 
     public String clickMe(){
         WebElement clickMeBtn = driver.findElement(clickMeButton);
-        actions.moveToElement(clickMeBtn).doubleClick().perform();;
-        String clickMeMesage = wait.until(ExpectedConditions.visibilityOfElementLocated(clickMeText)).getText();
-        return clickMeMesage;
+        clickJS(clickMeBtn);
+//        actions.scrollByAmount(300, 300).perform();
+        WebElement clickMeMesage = driver.findElement(clickMeText);
+        js.executeScript("arguments[0].scrollIntoView(true);", clickMeMesage);
+        return clickMeMesage.getText();
     }
 
-    public String shiftClickMe() {
-        WebElement clickMeBtn = driver.findElement(clickMeButton);
-        actions.keyDown(Keys.SHIFT)
-                .click(clickMeBtn)
-                .keyUp(Keys.SHIFT)
+    public void keyboardAction() {
+        WebElement username = driver.findElement(userName);
+        actions.click(username)
+                .keyDown(Keys.CONTROL)
+                .sendKeys("a")
+                .keyUp(Keys.CONTROL)
+                .sendKeys(Keys.BACK_SPACE)
+                .sendKeys("Test")
                 .perform();
-        String message = wait.until(ExpectedConditions.visibilityOfElementLocated(clickMeText)).getText();
-        return message;
+    }
+
+    public String dragAndDrop(){
+        js.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(dropElement));
+        WebElement dragWebElement = driver.findElement(dragElement);
+        WebElement dropWebElement = driver.findElement(dropElement);
+        actions.dragAndDrop(dragWebElement, dropWebElement).perform();
+        return dropWebElement.getText();
     }
 
 }

@@ -33,4 +33,17 @@ public class ButtonsTest extends BaseTest {
         Assert.assertEquals(clickMessage,con.getDataInput("clickmessage"));
     }
 
+    @Test
+    public void testDragDrop(){
+        driver.get("https://demoqa.com/droppable");
+        String text = buttonsPage.dragAndDrop();
+        Assert.assertEquals(text,"Dropped!");
+    }
+
+    @Test
+    public void testChain(){
+        driver.get("https://demoqa.com/text-box");
+        buttonsPage.keyboardAction();
+    }
+
 }
