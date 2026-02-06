@@ -4,6 +4,7 @@ import base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ public class FormsPage extends BasePage {
     By firstNameInput = By.id("firstName");
     By lastNameInput = By.id("lastName");
     By emailInput = By.id("userEmail");
+    By phonelInput = By.id("userNumber");
     By stateDropdown = By.id("state");
     private String genderXpath = "//label[text()='%s']";
     private String hobbieXpath = "//label[text()='%s']";
@@ -24,6 +26,7 @@ public class FormsPage extends BasePage {
     By textArea = By.xpath("//textarea[@id='currentAddress']");
     By stateInput = By.id("react-select-3-input");
     By submitButton = By.id("submit");
+    By successText = By.id("example-modal-sizes-title-lg");
 
     public FormsPage(WebDriver driver) {
         super(driver);
@@ -56,7 +59,13 @@ public class FormsPage extends BasePage {
     }
 
     public void inputAddress(String text){
-        driver.findElement(textArea).sendKeys(text);
+        WebElement textareaElement = driver.findElement(textArea);
+        js.executeScript("arguments[0].scrollIntoView(true);", textareaElement);
+        textareaElement.sendKeys(text);
+    }
+
+    public void inputPhone(String text){
+        driver.findElement(phonelInput).sendKeys(text);
     }
 
     public void chooseBirthdate(String day, String month, String year){
@@ -72,5 +81,9 @@ public class FormsPage extends BasePage {
         String ariaLabel = buildAriaLabel(date);
         driver.findElement(By.xpath(String.format(dateXpath,ariaLabel))).click();
         clickJS(driver.findElement(submitButton));
+    }
+
+    public String getSuccessText(){
+        return driver.findElement(successText).getText();
     }
 }
