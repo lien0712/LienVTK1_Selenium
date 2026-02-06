@@ -1,11 +1,15 @@
 package exercise1_2.pages;
 
 import base.BasePage;
+import org.example.ConfigReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class PracticeFormPage extends BasePage {
 
@@ -14,6 +18,7 @@ public class PracticeFormPage extends BasePage {
     private By emailInput = By.cssSelector("input[placeholder='name@example.com']");
     private By genderRadio = By.xpath("//label[normalize-space()='Male']");
     private By mobileInput = By.xpath("//input[@id='userNumber']");
+    private By hobbiesCheckbox = By.xpath("//label[text()='Reading']");
     // /preceding-sibling::input
     private By stateDropdown = By.xpath("//div[@id='state']");
 
