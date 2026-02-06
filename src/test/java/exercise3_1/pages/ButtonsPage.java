@@ -26,13 +26,15 @@ public class ButtonsPage extends BasePage {
 
     public String doubleClick(){
         WebElement doubleClickBtn = driver.findElement(doubleClickButton);
-        actions.moveToElement(doubleClickBtn).doubleClick().perform();;
+        actions.scrollByAmount(200,200).perform();
+        actions.moveToElement(doubleClickBtn).doubleClick().perform();
         String doubleClickMesage = wait.until(ExpectedConditions.visibilityOfElementLocated(doubleClickText)).getText();
         return doubleClickMesage;
     }
 
     public String rightClick(){
         WebElement rightClickBtn = driver.findElement(rightClickButton);
+        actions.scrollByAmount(200,200).perform();
         actions.moveToElement(rightClickBtn).contextClick().perform();;
         String rightClickMesage = wait.until(ExpectedConditions.visibilityOfElementLocated(rightClickText)).getText();
         return rightClickMesage;
@@ -59,7 +61,7 @@ public class ButtonsPage extends BasePage {
     }
 
     public String dragAndDrop(){
-        js.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(dropElement));
+        actions.scrollByAmount(200,200).perform();
         WebElement dragWebElement = driver.findElement(dragElement);
         WebElement dropWebElement = driver.findElement(dropElement);
         actions.dragAndDrop(dragWebElement, dropWebElement).perform();
