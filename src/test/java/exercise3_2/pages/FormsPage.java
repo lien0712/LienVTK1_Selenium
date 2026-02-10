@@ -27,6 +27,7 @@ public class FormsPage extends BasePage {
     By stateInput = By.id("react-select-3-input");
     By submitButton = By.id("submit");
     By successText = By.id("example-modal-sizes-title-lg");
+    By multiSelect = By.id("react-select-4-input");
 
     public FormsPage(WebDriver driver) {
         super(driver);
@@ -85,5 +86,14 @@ public class FormsPage extends BasePage {
 
     public String getSuccessText(){
         return driver.findElement(successText).getText();
+    }
+
+    public void selectMultiDropdown(String value1, String value2){
+        WebElement dropdown = driver.findElement(multiSelect);
+        clickJS(dropdown);
+        dropdown.sendKeys(value1);
+        dropdown.sendKeys(Keys.ENTER);
+        dropdown.sendKeys(value2);
+        dropdown.sendKeys(Keys.ENTER);
     }
 }

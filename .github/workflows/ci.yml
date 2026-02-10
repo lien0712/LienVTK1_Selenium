@@ -25,4 +25,4 @@ jobs:
         run: mvn checkstyle:check
 
       - name: Stage 2 - Run Automated Tests
-        run: mvn test
+        run: mvn test -DisCI=true

@@ -29,4 +29,10 @@ public class FormsTest extends BaseTest {
         formsPage.inputAddress(con.getDataInput("textAddress"));
         Assert.assertEquals(formsPage.getSuccessText(),con.getDataInput("successText"));
     }
+
+    @Test
+    public void verifyMultiSelectDropdown(){
+        driver.get("https://demoqa.com/select-menu");
+        formsPage.selectMultiDropdown(con.getDataInput("VALUE1"), con.getDataInput("VALUE2"));
+    }
 }
