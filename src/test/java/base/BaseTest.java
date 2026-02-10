@@ -19,7 +19,8 @@ public class BaseTest {
 
     @BeforeMethod
     public void setUp() {
-        String env = System.getProperty("env", "local");
+        String env = System.getenv("env");
+        if (env == null) env = "local";
 
         ChromeOptions options = new ChromeOptions();
 
