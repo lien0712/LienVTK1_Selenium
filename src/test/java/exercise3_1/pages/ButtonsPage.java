@@ -61,8 +61,8 @@ public class ButtonsPage extends BasePage {
 
     public String dragAndDrop(){
         actions.scrollByAmount(200,200).perform();
-        WebElement dragWebElement = driver.findElement(dragElement);
-        WebElement dropWebElement = driver.findElement(dropElement);
+        WebElement dragWebElement = wait.until(ExpectedConditions.visibilityOfElementLocated(dragElement));
+        WebElement dropWebElement = wait.until(ExpectedConditions.visibilityOfElementLocated(dropElement));
         actions.dragAndDrop(dragWebElement, dropWebElement).perform();
         wait.until(ExpectedConditions.visibilityOf(dropWebElement));
         return dropWebElement.getText();
