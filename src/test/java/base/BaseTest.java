@@ -30,7 +30,6 @@ public class BaseTest {
         }
 
         driver = new ChromeDriver(options);
-//        driver = new ChromeDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         con = new ConfigReader();
         driver.manage().window().maximize();

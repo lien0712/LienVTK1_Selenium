@@ -43,7 +43,8 @@ public class ButtonsTest extends BaseTest {
     @Test
     public void testChain(){
         driver.get("https://demoqa.com/text-box");
-        buttonsPage.keyboardAction();
+        String result = buttonsPage.keyboardAction();
+        Assert.assertEquals(result, "Test");
     }
 
 }

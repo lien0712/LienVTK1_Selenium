@@ -5,7 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ButtonsPage extends BasePage {
@@ -35,22 +34,21 @@ public class ButtonsPage extends BasePage {
     public String rightClick(){
         WebElement rightClickBtn = driver.findElement(rightClickButton);
         actions.scrollByAmount(200,200).perform();
-        actions.moveToElement(rightClickBtn).contextClick().perform();;
+        actions.moveToElement(rightClickBtn).contextClick().perform();
         String rightClickMesage = wait.until(ExpectedConditions.visibilityOfElementLocated(rightClickText)).getText();
         return rightClickMesage;
     }
 
     public String clickMe(){
         WebElement clickMeBtn = driver.findElement(clickMeButton);
-        clickJS(clickMeBtn);
-//        actions.scrollByAmount(300, 300).perform();
+        actions.moveToElement(clickMeBtn).click().perform();
         WebElement clickMeMesage = driver.findElement(clickMeText);
         js.executeScript("arguments[0].scrollIntoView(true);", clickMeMesage);
         return clickMeMesage.getText();
     }
 
-    public void keyboardAction() {
-        WebElement username = driver.findElement(userName);
+    public String keyboardAction() {
+        WebElement username = wait.until(ExpectedConditions.visibilityOfElementLocated(userName));
         actions.click(username)
                 .keyDown(Keys.CONTROL)
                 .sendKeys("a")
@@ -58,6 +56,7 @@ public class ButtonsPage extends BasePage {
                 .sendKeys(Keys.BACK_SPACE)
                 .sendKeys("Test")
                 .perform();
+        return username.getAttribute("value");
     }
 
     public String dragAndDrop(){
