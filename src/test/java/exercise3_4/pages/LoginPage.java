@@ -2,7 +2,6 @@ package exercise3_4.pages;
 
 import base.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 
 import java.io.*;
