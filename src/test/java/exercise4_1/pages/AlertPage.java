@@ -26,7 +26,8 @@ public class AlertPage extends BasePage {
 
     public String getConfirmOKResult(){
         driver.findElement(confirmButton).click();
-        driver.switchTo().alert().accept();
+        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        alert.accept();
         return driver.findElement(resultText).getText();
     }
 
@@ -56,9 +57,9 @@ public class AlertPage extends BasePage {
         driver.findElement(twoPromptLink).click();
         Alert alert = driver.switchTo().alert();
         alert.sendKeys(text);
-        String resutl = alert.getText();
+        String result = alert.getText();
         alert.accept();
-        return resutl;
+        return result;
     }
 
     public String getSecondPrompt(String text){
