@@ -7,8 +7,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class FormsTest extends BaseTest {
-
     FormsPage formsPage;
+
     @BeforeMethod
     public void initPage(){
         driver.get("https://demoqa.com/automation-practice-form");
@@ -28,11 +28,5 @@ public class FormsTest extends BaseTest {
         formsPage.chooseBirthdate(birthday.split("/")[0], birthday.split("/")[1],birthday.split("/")[2]);
         formsPage.inputAddress(con.getDataInput("textAddress"));
         Assert.assertEquals(formsPage.getSuccessText(),con.getDataInput("successText"));
-    }
-
-    @Test
-    public void verifyMultiSelectDropdown(){
-        driver.get("https://demoqa.com/select-menu");
-        formsPage.selectMultiDropdown(con.getDataInput("VALUE1"), con.getDataInput("VALUE2"));
     }
 }

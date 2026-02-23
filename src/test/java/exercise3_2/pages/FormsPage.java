@@ -6,6 +6,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -17,8 +18,8 @@ public class FormsPage extends BasePage {
     By emailInput = By.id("userEmail");
     By phonelInput = By.id("userNumber");
     By stateDropdown = By.id("state");
-    private String genderXpath = "//label[text()='%s']";
-    private String hobbieXpath = "//label[text()='%s']";
+    private String genderXpath = "//label[text()='%s']/preceding-sibling::input";
+    private String hobbieXpath = "//label[text()='%s']/preceding-sibling::input";
     By birthInput = By.id("dateOfBirthInput");
     String dateXpath = "//div[@aria-label='%s']";
     By monthPicker = By.xpath("//select[@class='react-datepicker__month-select']");
@@ -27,7 +28,6 @@ public class FormsPage extends BasePage {
     By stateInput = By.id("react-select-3-input");
     By submitButton = By.id("submit");
     By successText = By.id("example-modal-sizes-title-lg");
-    By multiSelect = By.id("react-select-4-input");
 
     public FormsPage(WebDriver driver) {
         super(driver);
@@ -52,11 +52,15 @@ public class FormsPage extends BasePage {
     }
 
     public void selectGender(String gender){
-        driver.findElement(By.xpath(String.format(genderXpath,gender))).click();
+        WebElement genderRadio = driver.findElement(By.xpath(String.format(genderXpath, gender)));
+        genderRadio.click();
+        Assert.assertTrue(genderRadio.isSelected(), "Gender radio should be selected");
     }
 
     public void selectHobbies(String hobbie){
-        driver.findElement(By.xpath(String.format(hobbieXpath,hobbie))).click();
+        WebElement hobbieRadio = driver.findElement(By.xpath(String.format(hobbieXpath, hobbie)));
+        hobbieRadio.click();
+        Assert.assertTrue(hobbieRadio.isSelected(), "Gender radio should be selected");
     }
 
     public void inputAddress(String text){
@@ -86,14 +90,5 @@ public class FormsPage extends BasePage {
 
     public String getSuccessText(){
         return driver.findElement(successText).getText();
-    }
-
-    public void selectMultiDropdown(String value1, String value2){
-        WebElement dropdown = driver.findElement(multiSelect);
-        clickJS(dropdown);
-        dropdown.sendKeys(value1);
-        dropdown.sendKeys(Keys.ENTER);
-        dropdown.sendKeys(value2);
-        dropdown.sendKeys(Keys.ENTER);
     }
 }
