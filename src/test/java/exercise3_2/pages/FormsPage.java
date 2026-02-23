@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class FormsPage extends BasePage {
 
@@ -46,13 +47,17 @@ public class FormsPage extends BasePage {
     }
 
     public void selectDropdownValue(String value){
-        clickJS(driver.findElement(stateDropdown));
-        driver.findElement(stateInput).sendKeys(value);
-        driver.findElement(stateInput).sendKeys(Keys.ENTER);
+        Select select = new Select(driver.findElement(stateDropdown));
+        select.selectByVisibleText(value);
+//        clickJS(driver.findElement(stateDropdown));
+//        driver.findElement(stateInput).sendKeys(value);
+//        driver.findElement(stateInput).sendKeys(Keys.ENTER);
     }
 
-    public void selectGender(String gender){
-        driver.findElement(By.xpath(String.format(genderXpath,gender))).click();
+    public boolean selectGender(String gender){
+        WebElement genderRadio = driver.findElement(By.xpath(String.format(genderXpath, gender)));
+        genderRadio.click();
+        return genderRadio.isSelected();
     }
 
     public void selectHobbies(String hobbie){
@@ -81,19 +86,20 @@ public class FormsPage extends BasePage {
         LocalDate date = LocalDate.parse(day+"/"+month +"/" + year, inputFormat);
         String ariaLabel = buildAriaLabel(date);
         driver.findElement(By.xpath(String.format(dateXpath,ariaLabel))).click();
-        clickJS(driver.findElement(submitButton));
+        driver.findElement(submitButton).click();
     }
 
     public String getSuccessText(){
         return driver.findElement(successText).getText();
     }
 
-    public void selectMultiDropdown(String value1, String value2){
+    public int selectMultiDropdown(String value1, String value2){
         WebElement dropdown = driver.findElement(multiSelect);
-        clickJS(dropdown);
-        dropdown.sendKeys(value1);
-        dropdown.sendKeys(Keys.ENTER);
-        dropdown.sendKeys(value2);
-        dropdown.sendKeys(Keys.ENTER);
+        Select select = new Select(dropdown);
+        select.selectByValue(value1);
+        select.selectByValue(value2);
+
+        List<WebElement> selectedOptions = select.getAllSelectedOptions();
+        return selectedOptions.size();
     }
 }

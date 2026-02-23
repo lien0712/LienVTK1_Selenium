@@ -22,7 +22,8 @@ public class FormsTest extends BaseTest {
         formsPage.inputEmail(con.getDataInput("email"));
         formsPage.selectDropdownValue(con.getDataInput("state"));
         formsPage.inputPhone(con.getDataInput("phone"));
-        formsPage.selectGender(con.getDataInput("gender"));
+        boolean gender = formsPage.selectGender(con.getDataInput("gender"));
+        Assert.assertTrue(gender, "Gender radio should be selected");
         formsPage.selectHobbies(con.getDataInput("hobbie"));
         String birthday = con.getDataInput("birthday");
         formsPage.chooseBirthdate(birthday.split("/")[0], birthday.split("/")[1],birthday.split("/")[2]);
@@ -33,6 +34,7 @@ public class FormsTest extends BaseTest {
     @Test
     public void verifyMultiSelectDropdown(){
         driver.get("https://demoqa.com/select-menu");
-        formsPage.selectMultiDropdown(con.getDataInput("VALUE1"), con.getDataInput("VALUE2"));
+        int selectSize = formsPage.selectMultiDropdown(con.getDataInput("VALUE1"), con.getDataInput("VALUE2"));
+        Assert.assertEquals(selectSize, 2, "Should have 2 options selected");
     }
 }
