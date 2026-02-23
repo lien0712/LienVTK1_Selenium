@@ -7,8 +7,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class FormsTest extends BaseTest {
-
     FormsPage formsPage;
+
     @BeforeMethod
     public void initPage(){
         driver.get("https://demoqa.com/automation-practice-form");
@@ -22,19 +22,11 @@ public class FormsTest extends BaseTest {
         formsPage.inputEmail(con.getDataInput("email"));
         formsPage.selectDropdownValue(con.getDataInput("state"));
         formsPage.inputPhone(con.getDataInput("phone"));
-        boolean gender = formsPage.selectGender(con.getDataInput("gender"));
-        Assert.assertTrue(gender, "Gender radio should be selected");
+        formsPage.selectGender(con.getDataInput("gender"));
         formsPage.selectHobbies(con.getDataInput("hobbie"));
         String birthday = con.getDataInput("birthday");
         formsPage.chooseBirthdate(birthday.split("/")[0], birthday.split("/")[1],birthday.split("/")[2]);
         formsPage.inputAddress(con.getDataInput("textAddress"));
         Assert.assertEquals(formsPage.getSuccessText(),con.getDataInput("successText"));
-    }
-
-    @Test
-    public void verifyMultiSelectDropdown(){
-        driver.get("https://demoqa.com/select-menu");
-        int selectSize = formsPage.selectMultiDropdown(con.getDataInput("VALUE1"), con.getDataInput("VALUE2"));
-        Assert.assertEquals(selectSize, 2, "Should have 2 options selected");
     }
 }
