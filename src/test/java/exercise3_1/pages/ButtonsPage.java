@@ -64,14 +64,11 @@ public class ButtonsPage extends BasePage {
         WebElement dropWebElement = wait.until(ExpectedConditions.elementToBeClickable(dropElement));
         System.out.println(dropWebElement.getText());
         actions.scrollByAmount(150, 150).perform();
-        try {
-            Thread.sleep(Duration.ofSeconds(5));
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        int xOffset = dragWebElement.getLocation().getX() - dropWebElement.getLocation().getX();
-        int yOffset = dragWebElement.getLocation().getY() - dropWebElement.getLocation().getY();
+//        try {
+//            Thread.sleep(Duration.ofSeconds(5));
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
 //        actions.dragAndDrop(dragWebElement, dropWebElement).perform();
 //        actions.clickAndHold(dragWebElement)
 //                .pause(Duration.ofSeconds(5))
@@ -79,15 +76,39 @@ public class ButtonsPage extends BasePage {
 //                .pause(Duration.ofSeconds(5))
 //                .release()
 //                .perform();
-//        actions.clickAndHold(dragWebElement)
-//                .moveToElement(dropWebElement)
-//                .release()
-//                .perform();
-        actions.clickAndHold(dragWebElement)
-                .pause(Duration.ofSeconds(3))
-                .moveToElement(dropWebElement)
-                .release()
-                .perform();
+        String xt = "function createEvent(typeOfEvent) {\n" +
+                "var event = document.createEvent(\"CustomEvent\");\n" +
+                "event.initCustomEvent(typeOfEvent, true, true, null);\n" +
+                "event.dataTransfer = {\n" +
+                "data: {},\n" +
+                "setData: function (key, value) {\n" +
+                "this.data[key] = value;\n" +
+                "},\n" +
+                "getData: function (key) {\n" +
+                "return this.data[key];\n" +
+                "}\n" +
+                "};\n" +
+                "return event;\n" +
+                "}\n" +
+                "\n" +
+                "function dispatchEvent(element, event, transferData) {\n" +
+                "if (transferData !== undefined) {\n" +
+                "event.dataTransfer = transferData;\n" +
+                "}\n" +
+                "element.dispatchEvent(event);\n" +
+                "}\n" +
+                "\n" +
+                "function dragAndDrop(element, target) {\n" +
+                "var dragStartEvent = createEvent('dragstart');\n" +
+                "dispatchEvent(element, dragStartEvent);\n" +
+                "var dropEvent = createEvent('drop');\n" +
+                "dispatchEvent(target, dropEvent, dragStartEvent.dataTransfer);\n" +
+                "var dragEndEvent = createEvent('dragend');\n" +
+                "dispatchEvent(element, dragEndEvent, dragStartEvent.dataTransfer);\n" +
+                "}\n" +
+                "\n" +
+                "dragAndDrop(arguments[0], arguments[1]);";
+        ((JavascriptExecutor)driver).executeScript(xt, dragWebElement, dropWebElement);
         System.out.println(dropWebElement.getText());
         return dropWebElement.getText();
     }
