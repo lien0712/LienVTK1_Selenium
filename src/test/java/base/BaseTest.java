@@ -21,6 +21,7 @@ public class BaseTest {
     public void setUp() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
         String isCI = System.getProperty("isCI", "false");
         if (isCI.equals("true")) {
             options.addArguments("--headless=new");
@@ -37,6 +38,6 @@ public class BaseTest {
 
     @AfterMethod
     public void tearDown() {
-        driver.quit();
+//        driver.quit();
     }
 }

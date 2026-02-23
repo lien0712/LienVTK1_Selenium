@@ -1,14 +1,12 @@
 package exercise3_1.pages;
 
 import base.BasePage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class ButtonsPage extends BasePage {
+import java.time.Duration;
 
+public class ButtonsPage extends BasePage {
     By doubleClickButton = By.id("doubleClickBtn");
     By rightClickButton = By.id("rightClickBtn");
     By clickMeButton = By.xpath("//button[text()='Click Me']");
@@ -43,7 +41,8 @@ public class ButtonsPage extends BasePage {
         WebElement clickMeBtn = driver.findElement(clickMeButton);
         actions.moveToElement(clickMeBtn).click().perform();
         WebElement clickMeMesage = driver.findElement(clickMeText);
-        js.executeScript("arguments[0].scrollIntoView(true);", clickMeMesage);
+        actions.scrollByAmount(200,200).perform();
+        actions.moveToElement(clickMeMesage).contextClick().perform();
         return clickMeMesage.getText();
     }
 
@@ -60,11 +59,36 @@ public class ButtonsPage extends BasePage {
     }
 
     public String dragAndDrop(){
-        actions.scrollByAmount(200,200).perform();
-        WebElement dragWebElement = wait.until(ExpectedConditions.visibilityOfElementLocated(dragElement));
-        WebElement dropWebElement = wait.until(ExpectedConditions.visibilityOfElementLocated(dropElement));
-        actions.dragAndDrop(dragWebElement, dropWebElement).perform();
-        wait.until(ExpectedConditions.visibilityOf(dropWebElement));
+        WebElement dragWebElement = wait.until(ExpectedConditions.elementToBeClickable(dragElement));
+        System.out.println(dragWebElement.getText());
+        WebElement dropWebElement = wait.until(ExpectedConditions.elementToBeClickable(dropElement));
+        System.out.println(dropWebElement.getText());
+        actions.scrollByAmount(150, 150).perform();
+        try {
+            Thread.sleep(Duration.ofSeconds(5));
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        int xOffset = dragWebElement.getLocation().getX() - dropWebElement.getLocation().getX();
+        int yOffset = dragWebElement.getLocation().getY() - dropWebElement.getLocation().getY();
+//        actions.dragAndDrop(dragWebElement, dropWebElement).perform();
+//        actions.clickAndHold(dragWebElement)
+//                .pause(Duration.ofSeconds(5))
+//                .moveByOffset(xOffset, yOffset)
+//                .pause(Duration.ofSeconds(5))
+//                .release()
+//                .perform();
+//        actions.clickAndHold(dragWebElement)
+//                .moveToElement(dropWebElement)
+//                .release()
+//                .perform();
+        actions.clickAndHold(dragWebElement)
+                .pause(Duration.ofSeconds(3))
+                .moveToElement(dropWebElement)
+                .release()
+                .perform();
+        System.out.println(dropWebElement.getText());
         return dropWebElement.getText();
     }
 
