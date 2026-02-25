@@ -24,20 +24,44 @@ public class MultipleWindowsPage extends BasePage {
     }
 
     public String openNewWindow(){
-        wait.until(ExpectedConditions.elementToBeClickable(newWindow));
-        driver.switchTo().newWindow(WindowType.TAB);
+        Set<String> oldWindows = driver.getWindowHandles();
+        wait.until(ExpectedConditions.elementToBeClickable(newWindow)).click();
+        wait.until(d -> d.getWindowHandles().size() > oldWindows.size());
+        Set<String> allWindows = driver.getWindowHandles();
+        for (String handle : allWindows) {
+            if (!oldWindows.contains(handle)) {
+                driver.switchTo().window(handle);
+                break;
+            }
+        }
         return driver.getWindowHandle();
     }
 
     public String openNewTab(){
-        wait.until(ExpectedConditions.elementToBeClickable(newTab));
-        driver.switchTo().newWindow(WindowType.TAB);
+        Set<String> oldWindows = driver.getWindowHandles();
+        wait.until(ExpectedConditions.elementToBeClickable(newTab)).click();
+        wait.until(d -> d.getWindowHandles().size() > oldWindows.size());
+        Set<String> allWindows = driver.getWindowHandles();
+        for (String handle : allWindows) {
+            if (!oldWindows.contains(handle)) {
+                driver.switchTo().window(handle);
+                break;
+            }
+        }
         return driver.getWindowHandle();
     }
 
     public String openNewWindowMess(){
-        wait.until(ExpectedConditions.elementToBeClickable(newWindowMess));
-        driver.switchTo().newWindow(WindowType.TAB);
+        Set<String> oldWindows = driver.getWindowHandles();
+        wait.until(ExpectedConditions.elementToBeClickable(newWindowMess)).click();
+        wait.until(d -> d.getWindowHandles().size() > oldWindows.size());
+        Set<String> allWindows = driver.getWindowHandles();
+        for (String handle : allWindows) {
+            if (!oldWindows.contains(handle)) {
+                driver.switchTo().window(handle);
+                break;
+            }
+        }
         return driver.getWindowHandle();
     }
 
@@ -66,5 +90,10 @@ public class MultipleWindowsPage extends BasePage {
 
     public String getMessage(){
         return wait.until(ExpectedConditions.visibilityOfElementLocated(message)).getText();
+    }
+
+    public String getBodyText(){
+        WebElement body = driver.findElement(By.tagName("body"));
+        return body.getText();
     }
 }

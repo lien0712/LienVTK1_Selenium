@@ -22,13 +22,16 @@ public class MultipleWindowsTest extends BaseTest {
         String newWindowMess = mPage.getMessage();
         System.out.println(newWindowMess);
         Assert.assertEquals(newWindowMess,"This is a sample page", "Could not switch to new window");
+
+        mPage.switchToWindow(mainWindow);
         String newTab = mPage.openNewTab();
         String newTabTitle = mPage.getMessage();
         System.out.println(newTabTitle);
         Assert.assertEquals(newTabTitle,"This is a sample page", "Could not switch to new tab");
-        String newMessageWindow = mPage.openNewWindow();
-        String newWindowTitle = driver.getTitle();
-        System.out.println(newWindowTitle);
+
+        mPage.switchToWindow(mainWindow);
+        String newMessageWindow = mPage.openNewWindowMess();
+
         mPage.closeAllNewWindow(mainWindow);
         mPage.switchToWindow(mainWindow);
         Assert.assertEquals(mPage.getTotalWindows(),1, "Could not close the window");
