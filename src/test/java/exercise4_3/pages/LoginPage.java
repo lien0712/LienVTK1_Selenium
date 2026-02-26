@@ -2,6 +2,7 @@ package exercise4_3.pages;
 
 import base.BasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -28,7 +29,10 @@ public class LoginPage extends BasePage {
     public void login(String username, String password){
         wait.until(ExpectedConditions.visibilityOfElementLocated(usernameInput)).sendKeys(username);
         wait.until(ExpectedConditions.visibilityOfElementLocated(passwordInput)).sendKeys(password);
-        wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
+        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(loginButton));
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].click();", button
+        );
     }
 
     public String getName(){
@@ -41,7 +45,10 @@ public class LoginPage extends BasePage {
     }
 
     public String goCreateUser(){
-        wait.until(ExpectedConditions.elementToBeClickable(newUser)).click();
+        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(newUser));
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].click();", button
+        );
         return wait.until(ExpectedConditions.visibilityOfElementLocated(registerText)).getText();
     }
 
