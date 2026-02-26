@@ -9,8 +9,10 @@
 <!--            </run>-->
 <!--        </groups>-->
         <classes>
-            <class name="exercise2_3.testcases.TestLoginSuccessful">
+            <class name="exercise4_2.tests.MultipleWindowsTest">
             </class>
+            <class name="exercise4_2.tests.IFrameTest"></class>
+            <class name="exercise4_2.tests.NestedFrameTest"></class>
         </classes>
     </test>
 </suite>
