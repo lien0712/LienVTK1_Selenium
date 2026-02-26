@@ -11,7 +11,7 @@ public class LoginPage extends BasePage {
     By usernameInput = By.xpath("//input[contains(@id, 'user')]");
     By passwordInput = By.id("password");
     By welcomeMessage = By.cssSelector("form>div:first-child>h5");
-    By newUser = By.xpath("newUser");
+    By newUser = By.id("newUser");
     By userName = By.cssSelector("#userName-value");
     By registerText = By.cssSelector("#userForm>div:first-child>h4");
 
