@@ -3,6 +3,8 @@ package exercise5_2.tests;
 import Utils.CSVUtils;
 import Utils.ExcelUtils;
 import base.BaseTest;
+import exercise5_2.factories.UserFactory;
+import exercise5_2.models.User;
 import exercise5_2.page.LoginPage;
 import exercise5_2.page.ProfilePage;
 import org.testng.Assert;
@@ -40,6 +42,15 @@ public class LoginTest extends BaseTest {
                 "src/test/resources/account.xlsx",
                 "account"
         );
+    }
+
+    @DataProvider(name = "loginData4")
+    public Object[][] getInvalidUsers() {
+        return new Object[][] {
+                {UserFactory.createValidUser()},
+                {UserFactory.createUserInvalid()},
+                {UserFactory.createUserWithEmptyPassword()}
+        };
     }
 
     @Test(dataProvider = "loginData1")
@@ -81,6 +92,20 @@ public class LoginTest extends BaseTest {
             Assert.assertTrue(check, "Expected login FAILED - user: " + username);
         } else {
             Assert.assertFalse(check, "Expected login FAIL - user: " + username);
+        }
+    }
+
+    @Test(dataProvider = "loginData4")
+    public void testLogin4(User user){
+        ProfilePage profilePage = loginPage
+                .enterUsername(user.getUsername())
+                .enterPassword(user.getPassword())
+                .clickSubmit();
+        boolean check = profilePage.isDeleteButtonDisplayed();
+        if (user.getExpectedResult().equalsIgnoreCase("success")) {
+            Assert.assertTrue(check, "Expected login FAILED - user: " + user.getUsername());
+        } else {
+            Assert.assertFalse(check, "Expected login FAIL - user: " + user.getPassword());
         }
     }
 }
