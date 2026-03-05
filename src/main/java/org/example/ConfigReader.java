@@ -10,8 +10,8 @@ public class ConfigReader {
 
     public String getDataInput(String key) {
         try {
-            String value = "";
-            InputStream input = new FileInputStream("src/test/resources/config.properties");
+            String value;
+            InputStream input = new FileInputStream("config.properties");
             prop.load(input);
             value = prop.getProperty(key);
             input.close();
