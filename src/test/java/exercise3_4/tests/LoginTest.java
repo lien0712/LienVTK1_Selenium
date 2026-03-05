@@ -6,6 +6,7 @@ import exercise3_4.pages.LoginPage;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -57,8 +58,16 @@ public class LoginTest extends BaseTest {
         }
 
         driver.quit();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        ChromeOptions options = new ChromeOptions();
+        String isCI = System.getProperty("isCI", "false");
+        if (isCI.equals("true")) {
+            options.addArguments("--headless=new");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--window-size=1920,1080");
+        }
+
+        driver = new ChromeDriver(options);
         driver.get(con.getDataInput("LOGIN_PAGE"));
         Set<Cookie> loadedCookies = CookieUtils.loadCookies(cookieFile);
         for (Cookie cookie : loadedCookies) {
@@ -75,5 +84,19 @@ public class LoginTest extends BaseTest {
         driver.navigate().refresh();
         driver.get("https://demoqa.com/profile");
         Assert.assertEquals(driver.getCurrentUrl(),"https://demoqa.com/profile", "Login fail");
+    }
+
+    @Test
+    public void testDeleteAllCookies() {
+        // Add multiple cookies
+        driver.manage().addCookie(new Cookie("cookie1", "value1"));
+        driver.manage().addCookie(new Cookie("cookie2", "value2"));
+
+        // Delete all cookies
+        driver.manage().deleteAllCookies();
+
+        // Verify all deleted
+        Set<Cookie> remaining = driver.manage().getCookies();
+        Assert.assertTrue(remaining.isEmpty(), "All cookies should be deleted");
     }
 }
