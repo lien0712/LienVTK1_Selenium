@@ -23,7 +23,6 @@ public class BaseTest {
     @BeforeMethod
     public void setUp() {
         WebDriverManager.chromedriver().setup();
-
         String downloadPath = System.getProperty("user.dir")
                 + File.separator + "src"
                 + File.separator + "test"
