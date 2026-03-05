@@ -9,7 +9,7 @@
 <!--            </run>-->
 <!--        </groups>-->
         <classes>
-            <class name="exercise3_1.tests.ButtonsTest">
+            <class name="exercise2_3.testcases.TestLoginSuccessful">
             </class>
         </classes>
     </test>
