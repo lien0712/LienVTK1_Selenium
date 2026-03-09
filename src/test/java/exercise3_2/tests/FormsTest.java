@@ -7,8 +7,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class FormsTest extends BaseTest {
-
     FormsPage formsPage;
+
     @BeforeMethod
     public void initPage(){
         driver.get("https://demoqa.com/automation-practice-form");
