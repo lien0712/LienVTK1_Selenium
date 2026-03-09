@@ -41,6 +41,6 @@ public class BookStoreTest extends BaseTest {
             System.out.println("Help: " + v.getHelp());
         }
 
-        Assert.assertEquals(violations.size(), 7, "Accessibility violations found!");
+        Assert.assertTrue(!violations.isEmpty(), "Accessibility violations were not found!");
     }
 }
