@@ -26,13 +26,14 @@ public class LoginPage extends BasePage {
         return name.getAttribute("value");
     }
 
-    public void login(String username, String password){
+    public ProfilePage login(String username, String password){
         wait.until(ExpectedConditions.visibilityOfElementLocated(usernameInput)).sendKeys(username);
         wait.until(ExpectedConditions.visibilityOfElementLocated(passwordInput)).sendKeys(password);
         WebElement button = wait.until(ExpectedConditions.elementToBeClickable(loginButton));
         ((JavascriptExecutor) driver).executeScript(
                 "arguments[0].click();", button
         );
+        return new ProfilePage(driver);
     }
 
     public String getName(){

@@ -31,14 +31,16 @@ public class BasePage {
         js = (JavascriptExecutor) driver;
     }
 
-    public void click(By element){
+    public BasePage click(By element){
         WebElement webElement = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
         webElement.click();
+        return this;
     }
 
-    public void sendKeys(By element, String value){
+    public BasePage sendKeys(By element, String value){
         WebElement webElement = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
         webElement.sendKeys(value);
+        return this;
     }
 
     public String getText(By element){
