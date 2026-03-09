@@ -42,6 +42,7 @@ public class BaseTest {
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("prefs", prefs);
 
+        ChromeOptions options = new ChromeOptions();
         String isCI = System.getProperty("isCI", "false");
         if (isCI.equals("true")) {
             options.addArguments("--headless=new");
