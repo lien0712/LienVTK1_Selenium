@@ -10,7 +10,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 
+import java.io.File;
 import java.time.Duration;
+import java.util.HashMap;
 
 public class BaseTest {
 
@@ -21,7 +23,25 @@ public class BaseTest {
     @BeforeMethod
     public void setUp() {
         WebDriverManager.chromedriver().setup();
+
+        String downloadPath = System.getProperty("user.dir")
+                + File.separator + "src"
+                + File.separator + "test"
+                + File.separator + "download";
+
+        File folder = new File(downloadPath);
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+        HashMap<String, Object> prefs = new HashMap<>();
+        prefs.put("download.default_directory", downloadPath);
+        prefs.put("download.prompt_for_download", false);
+        prefs.put("download.directory_upgrade", true);
+        prefs.put("safebrowsing.enabled", true);
+
         ChromeOptions options = new ChromeOptions();
+        options.setExperimentalOption("prefs", prefs);
+
         String isCI = System.getProperty("isCI", "false");
         if (isCI.equals("true")) {
             options.addArguments("--headless=new");
@@ -38,6 +58,6 @@ public class BaseTest {
 
     @AfterMethod
     public void tearDown() {
-//        driver.quit();
+        driver.quit();
     }
 }

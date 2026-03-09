@@ -9,8 +9,8 @@
 <!--            </run>-->
 <!--        </groups>-->
         <classes>
-            <class name="exercise2_3.testcases.TestLoginSuccessful">
-            </class>
+            <class name="exercise4_3.tests.BookStoreTest"></class>
+            <class name="exercise4_3.tests.LoginTest"></class>
         </classes>
     </test>
 </suite>

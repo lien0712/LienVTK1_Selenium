@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -28,6 +29,42 @@ public class BasePage {
         this.con = new ConfigReader();
         this.actions = new Actions(driver);
         js = (JavascriptExecutor) driver;
+    }
+
+    public BasePage click(By element){
+        WebElement webElement = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+        webElement.click();
+        return this;
+    }
+
+    public BasePage sendKeys(By element, String value){
+        WebElement webElement = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+        webElement.sendKeys(value);
+        return this;
+    }
+
+    public String getText(By element){
+        WebElement webElement = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+        return webElement.getText();
+    }
+
+    public void selectDropdown(By locator, String value, String type) {
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+        Select select = new Select(element);
+
+        switch (type.toLowerCase()) {
+            case "text":
+                select.selectByVisibleText(value);
+                break;
+            case "value":
+                select.selectByValue(value);
+                break;
+            case "index":
+                select.selectByIndex(Integer.parseInt(value));
+                break;
+            default:
+                throw new IllegalArgumentException("Type không hợp lệ: " + type + ". Dùng: text | value | index");
+        }
     }
 
     public void sendText(By element, String text){
